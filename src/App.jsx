@@ -14,23 +14,45 @@ function App() {
     return (
         <>
             <div className="flex h-screen">
-                <div className="w-2/3">
-                    <div className="w-10/12 bg-gray-200 justify-center m-auto">
-                        <h1 className='font-semibold text-2xl'>My account</h1>
+                <div className="w-3/5">
+                    <div className="w-8/12  justify-center m-auto">
+                        <h1 className='font-semibold text-2xl my-4'>My account</h1>
                         <div className="flex">
                             <p>Balance</p>
                             <p className='text-3xl font-bold'>0€</p>
                         </div>
-                        <p>History</p>
-                        <div className='flex'>
+                        <p className='font-semibold mb-3'>Expense History</p>
+                        <div className='flex my-2'>
+                            <span>Achat de nourriture</span>
+                            <span className='font-semibold'>200€</span>
+                        </div>
+                        <div className='flex my-2'>
+                            <span>Achat de nourriture</span>
+                            <span className='font-semibold'>200€</span>
+                        </div>
+                        <div className='flex my-2'>
+                            <span>Achat de nourriture</span>
+                            <span className='font-semibold'>200€</span>
+                        </div>
+
+                        <p className='font-semibold mb-3'>Income History</p>
+                        <div className='flex my-2'>
+                            <span>Achat de nourriture</span>
+                            <span className='font-semibold'>200€</span>
+                        </div>
+                        <div className='flex my-2'>
+                            <span>Achat de nourriture</span>
+                            <span className='font-semibold'>200€</span>
+                        </div>
+                        <div className='flex my-2'>
                             <span>Achat de nourriture</span>
                             <span className='font-semibold'>200€</span>
                         </div>
 
 
                         {/* <!-- Modal toggle --> */}
-                        <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                            Toggle modal
+                        <button data-modal-target="default-modal" data-modal-toggle="default-modal" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                            Add transaction
                         </button>
 
                         {/* <!-- Main modal --> */}
@@ -39,8 +61,7 @@ function App() {
                                 {/* <!-- Modal content --> */}
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     {/* <!-- Modal header --> */}
-                                    <div class="flex items-center justify-center p-4 md:p-5  rounded-t dark:border-gray-600">
-                                        <span className='font-medium mt-3'>New transaction</span>
+                                    <div class="flex items-center justify-between p-4  md:p-1  rounded-t dark:border-gray-600">
                                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -49,7 +70,7 @@ function App() {
                                         </button>
                                     </div>
                                     {/* <!-- Modal body --> */}
-                                    <div class="p-4 md:p-5 space-y-4">
+                                    <div class="p-4 md:p-5 space-y-4 ">
                                         <div className="text-center">
 
                                             <div className="w-full">
@@ -115,7 +136,7 @@ function App() {
                                     </div>
                                     {/* <!-- Modal footer --> */}
                                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button data-modal-hide="default-modal" type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
+                                        <button data-modal-hide="default-modal" type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
 
                                     </div>
                                 </div>
@@ -125,8 +146,8 @@ function App() {
                     </div>
                     <div className="text-center">
 
-                        <div className="w-1/2">
-                            {/* <Tabs aria-label="Pills" style="pills" className='' color='primary'>
+                        {/* <div className="w-1/2">
+                            <Tabs aria-label="Pills" style="pills" className='' color='primary'>
                                 <Tabs.Item active title="Tab 1" className='text-blue-500'>
                                     <p className="text-sm text-blue-500 dark:text-gray-400">Content 1</p>
                                 </Tabs.Item>
@@ -136,7 +157,7 @@ function App() {
                                 <Tabs.Item title="Tab 3">
                                     <p className="text-sm text-gray-500 dark:text-gray-400">Content 3</p>
                                 </Tabs.Item>
-                            </Tabs> */}
+                            </Tabs>
                             <span className='font-medium mt-3'>New transaction</span>
                             <h1 className='text-6xl font-bold my-4'>{amount}<span className='text-4xl'>€</span> </h1>
                             <Tabs>
@@ -183,10 +204,10 @@ function App() {
 
                                 </div>
                             </Tabs>
-                        </div>
+</div> */}
                     </div>
                 </div>
-                <div className="w-1/3 bg-blue-200"></div>
+                <div className="w-2/5 bg-blue-200"></div>
             </div>
         </>
     )
