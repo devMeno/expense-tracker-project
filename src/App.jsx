@@ -21,32 +21,30 @@ function App() {
                             <p>Balance</p>
                             <p className='text-3xl font-bold'>0€</p>
                         </div>
-                        <p className='font-semibold mb-3'>Expense History</p>
-                        <div className='flex my-2'>
-                            <span>Achat de nourriture</span>
-                            <span className='font-semibold'>200€</span>
+                        <p className='font-semibold mb-3'>History</p>
+                        <div className='flex my-2 relative'>
+                            <img src="https://fakeimg.pl/600x400" alt="" className="w-12 h-12 rounded-lg" />
+                            <div className="ml-4">
+                                <span className="font-bold">Title</span><br />
+                                <span>Autor</span>
+                            </div>
+                            <div className="text-right absolute right-3 h-full"><span className='font-semibold text-green-500'>+220€</span><br /><span>date</span></div>
                         </div>
-                        <div className='flex my-2'>
-                            <span>Achat de nourriture</span>
-                            <span className='font-semibold'>200€</span>
+                        <div className='flex my-2 relative'>
+                            <img src="https://fakeimg.pl/600x400" alt="" className="w-12 h-12 rounded-lg" />
+                            <div className="ml-4">
+                                <span className="font-bold">Title</span><br />
+                                <span>Autor</span>
+                            </div>
+                            <div className="text-right absolute right-3 h-full"><span className='font-semibold text-red-500'>-90€</span><br /><span>date</span></div>
                         </div>
-                        <div className='flex my-2'>
-                            <span>Achat de nourriture</span>
-                            <span className='font-semibold'>200€</span>
-                        </div>
-
-                        <p className='font-semibold mb-3'>Income History</p>
-                        <div className='flex my-2'>
-                            <span>Achat de nourriture</span>
-                            <span className='font-semibold'>200€</span>
-                        </div>
-                        <div className='flex my-2'>
-                            <span>Achat de nourriture</span>
-                            <span className='font-semibold'>200€</span>
-                        </div>
-                        <div className='flex my-2'>
-                            <span>Achat de nourriture</span>
-                            <span className='font-semibold'>200€</span>
+                        <div className='flex my-2 relative'>
+                            <img src="https://fakeimg.pl/600x400" alt="" className="w-12 h-12 rounded-lg" />
+                            <div className="ml-4">
+                                <span className="font-bold">Title</span><br />
+                                <span>Autor</span>
+                            </div>
+                            <div className="text-right absolute right-3 h-full"><span className='font-semibold text-green-500'>+220€</span><br /><span>date</span></div>
                         </div>
 
 
@@ -87,6 +85,7 @@ function App() {
     </Tabs> */}
                                                 <span className='font-medium mt-3'>New transaction</span>
                                                 <h1 className='text-6xl font-bold my-4'>{amount}<span className='text-4xl'>€</span> </h1>
+                                                <input type="date" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" />
                                                 <Tabs>
                                                     <button label="Expense" className=''>
 
