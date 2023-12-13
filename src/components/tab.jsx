@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { TypeContext } from './typeContext';
 
 class Tab extends Component {
+
      static propTypes = {
           activeTab: PropTypes.string.isRequired,
           label: PropTypes.string.isRequired,

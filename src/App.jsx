@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './App.css'
 // import { Tabs } from 'flowbite-react';
 import Tabs from './components/tabs'
 import { addTransaction } from './components/methods'
 import { getHistory } from './components/methods'
+import { v4 as uuidv4 } from 'uuid'
+import { useRef } from 'react'
+import { TypeContext } from './components/typeContext'
 
 
 function App() {
@@ -11,6 +14,9 @@ function App() {
     const [date, setDate] = useState("");
     const [firstAttribute, setFirstAttribute] = useState("");
     const [secondAttribute, setSecondAttribute] = useState("");
+    const [type, setType] = useState('Expense');
+    const ref = useRef(null);
+    const context = useContext(TypeContext);
 
     const handleAmountChange = (e) => {
         setAmount(e.target.value);
@@ -29,8 +35,8 @@ function App() {
     }
 
     const transaction = {
-        id: 0,
-        type: ,
+        id: crypto.randomUUID(),
+        type: crypto.randomUUID(),
         date: date,
         amount: amount,
         first: firstAttribute,
@@ -75,26 +81,26 @@ function App() {
 
 
                         {/* <!-- Modal toggle --> */}
-                        <button data-modal-target="default-modal" data-modal-toggle="default-modal" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        <button data-modal-target="default-modal" data-modal-toggle="default-modal" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onClick={console.log(context)}>
                             Add transaction
                         </button>
 
                         {/* <!-- Main modal --> */}
-                        <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-2/3 md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                        <div id="default-modal" tabIndex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-2/3 md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div className="relative p-4 w-full max-w-2xl max-h-full">
                                 {/* <!-- Modal content --> */}
-                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     {/* <!-- Modal header --> */}
-                                    <div class="flex items-center justify-between p-4  md:p-1  rounded-t dark:border-gray-600">
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    <div className="flex items-center justify-between p-4  md:p-1  rounded-t dark:border-gray-600">
+                                        <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                                            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                             </svg>
-                                            <span class="sr-only">Close modal</span>
+                                            <span className="sr-only">Close modal</span>
                                         </button>
                                     </div>
                                     {/* <!-- Modal body --> */}
-                                    <div class="p-4 md:p-5 space-y-4 ">
+                                    <div className="p-4 md:p-5 space-y-4 ">
                                         <div className="text-center">
 
                                             <div className="w-full">
@@ -113,45 +119,51 @@ function App() {
                                                 <h1 className='text-6xl font-bold my-4'>{amount}<span className='text-4xl'>€</span> </h1>
                                                 <input type="date" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" onChange={handleDateChange} />
                                                 <Tabs>
-                                                    <button label="Expense" className=''>
+                                                    <button label="Expense" className='' onClick={() => {
+                                                        setType('income');
+                                                        console.log(type)
+                                                    }}>
 
-                                                        <form class=" mx-auto">
+                                                        <form className=" mx-auto">
                                                             <input type="number" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Amount" onChange={handleAmountChange} />
                                                             <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Description" onChange={handleFirstAttributeChange} />
-                                                            <select id="countries" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" onChange={handleSecondAttributeChange}>
+                                                            <select id="countries" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" onChange={handleSecondAttributeChange}>
                                                                 <option>Category</option>
-                                                                <option>United States</option>
-                                                                <option>Canada</option>
-                                                                <option>France</option>
-                                                                <option>Germany</option>
+                                                                <option>Family</option>
+                                                                <option>Job</option>
+                                                                <option>Religion</option>
+                                                                <option>Entertainment</option>
                                                             </select>
-                                                            {/* <button type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button> */}
+                                                            {/* <button type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button> */}
                                                         </form>
 
                                                     </button>
-                                                    <div label="Income">
+                                                    <button label="Income" onClick={() => {
+                                                        setType('income');
+                                                        console.log(type)
+                                                    }}>
 
-                                                        <form class=" mx-auto">
+                                                        <form className=" mx-auto">
                                                             <input type="number" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Amount" onChange={handleAmountChange} />
                                                             <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Origin" onChange={handleFirstAttributeChange} />
                                                             <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Object" onChange={handleSecondAttributeChange} />
-                                                            {/* <button type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button> */}
+                                                            {/* <button type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button> */}
                                                         </form>
 
-                                                    </div>
+                                                    </button>
                                                     <div label="Investment">
 
-                                                        <form class=" mx-auto">
+                                                        <form className=" mx-auto">
                                                             <input type="number" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Amount" onChange={handleAmountChange} />
                                                             <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Platform" onChange={handleFirstAttributeChange} />
-                                                            <select id="countries" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" onChange={handleSecondAttributeChange}>
+                                                            <select id="countries" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" onChange={handleSecondAttributeChange}>
                                                                 <option>Category</option>
                                                                 <option>Sport bets</option>
                                                                 <option>Trading</option>
                                                                 <option>Learning</option>
                                                                 <option>Other</option>
                                                             </select>
-                                                            {/* <button data-modal-hide="default-modal" type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button> */}
+                                                            {/* <button data-modal-hide="default-modal" type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button> */}
                                                         </form>
 
                                                     </div>
@@ -160,7 +172,7 @@ function App() {
                                         </div>
                                     </div>
                                     {/* <!-- Modal footer --> */}
-                                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                    <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                         <button data-modal-hide="default-modal" type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
 
                                     </div>
@@ -188,43 +200,43 @@ function App() {
                             <Tabs>
                                 <button label="Expense" className=''>
 
-                                    <form class=" mx-auto">
+                                    <form className=" mx-auto">
                                         <input type="number" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Amount" onChange={handleAmountChange} />
                                         <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Description" />
-                                        <select id="countries" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3">
+                                        <select id="countries" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3">
                                             <option>Category</option>
                                             <option>United States</option>
                                             <option>Canada</option>
                                             <option>France</option>
                                             <option>Germany</option>
                                         </select>
-                                        <button type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
+                                        <button type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
                                     </form>
 
                                 </button>
                                 <div label="Income">
 
-                                    <form class=" mx-auto">
+                                    <form className=" mx-auto">
                                         <input type="number" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Amount" onChange={handleAmountChange} />
                                         <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Origin" />
                                         <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Object" />
-                                        <button type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
+                                        <button type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
                                     </form>
 
                                 </div>
                                 <div label="Investment">
 
-                                    <form class=" mx-auto">
+                                    <form className=" mx-auto">
                                         <input type="number" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Amount" onChange={handleAmountChange} />
                                         <input type="text" id="" aria-describedby="helper-text-explanation" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3" placeholder="Platform" />
-                                        <select id="countries" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3">
+                                        <select id="countries" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-3">
                                             <option>Category</option>
                                             <option>Sport bets</option>
                                             <option>Trading</option>
                                             <option>Learning</option>
                                             <option>Other</option>
                                         </select>
-                                        <button type="button" class="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
+                                        <button type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add transaction</button>
                                     </form>
 
                                 </div>
