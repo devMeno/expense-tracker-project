@@ -17,3 +17,18 @@ export function addTransaction(newTransaction) {
      history.push(newTransaction);
      saveHistory(history);
 }
+
+export function getBalance() {
+     let history = getHistory();
+     let incomes = 0;
+     let expenses = 0;
+     history.forEach(element => {
+          if (element.type === 'income') {
+               incomes += element.amount;
+          } else {
+               expenses += element.amount;
+          }
+     });
+     let balance = incomes - expenses;
+     return balance;
+}

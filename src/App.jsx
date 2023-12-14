@@ -6,6 +6,7 @@ import { addTransaction } from './components/methods'
 import { getHistory } from './components/methods'
 import { v4 as uuidv4 } from 'uuid'
 import Transaction from './components/transaction'
+import { getBalance } from './components/methods'
 
 function App() {
     const [amount, setAmount] = useState(0);
@@ -15,6 +16,7 @@ function App() {
     const [type, setType] = useState('Expense');
     // const context = useContext(TypeContext);
     const his = getHistory();
+    const balance = getBalance();
 
     const handleAmountChange = (e) => {
         setAmount(e.target.value);
@@ -42,8 +44,8 @@ function App() {
     }
 
     useEffect(() => {
-        console.log(type)
-    }, [type])
+        console.log(balance)
+    }, [])
 
     return (
         <>
