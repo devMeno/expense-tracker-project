@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Tab from './tab';
-import { TypeContext } from './typeContext';
 
 
 class Tabs extends Component {
@@ -40,14 +39,12 @@ class Tabs extends Component {
                               const { label } = child.props;
 
                               return (
-                                   <TypeContext.Provider value={label}>
-                                        <Tab
-                                             activeTab={activeTab}
-                                             key={label}
-                                             label={label}
-                                             onClick={onClickTabItem}
-                                        />
-                                   </TypeContext.Provider>
+                                   <Tab
+                                        activeTab={activeTab}
+                                        key={label}
+                                        label={label}
+                                        onClick={onClickTabItem}
+                                   />
                               );
                          })}
                     </ol>

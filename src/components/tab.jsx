@@ -1,6 +1,5 @@
-import React, { Component, useContext } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { TypeContext } from './typeContext';
 
 class Tab extends Component {
 
@@ -14,6 +13,7 @@ class Tab extends Component {
           const { label, onClick } = this.props;
           onClick(label);
      }
+
 
      render() {
           const {
@@ -30,11 +30,21 @@ class Tab extends Component {
                className += ' tab-list-active';
           }
 
+          const handleSetType = () => {
+               const [type, setType] = useState('');
+               setType(label);
+               console.log(type);
+          }
+
           return (
                <div className='w-1/3 text-gray-500'>
                     <button
                          className={className}
-                         onClick={onClick}
+                         onClick={(e) => {
+                              e.preventDefault();
+                              onClick();
+                              handleSetType();
+                         }}
                     >
                          {label}
                     </button>

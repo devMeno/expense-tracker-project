@@ -5,7 +5,7 @@ function saveHistory(all) {
 export function getHistory() {
      const history = localStorage.getItem('all_transactions');
      if (history != null) {
-          return JSON.parse(cart);
+          return JSON.parse(history);
      } else {
           return [];
      }
@@ -13,7 +13,7 @@ export function getHistory() {
 
 export function addTransaction(newTransaction) {
      let history = getHistory();
-
+     console.log(history);
      history.push(newTransaction);
      saveHistory(history);
 }
