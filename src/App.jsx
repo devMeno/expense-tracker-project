@@ -15,8 +15,8 @@ function App() {
     const [secondAttribute, setSecondAttribute] = useState("");
     const [type, setType] = useState('Expense');
     // const context = useContext(TypeContext);
-    const his = getHistory();
-    const balance = getBalance();
+    const [his, setHis] = useState([]);
+    const [balance, setBalance] = useState(0);
 
     const handleAmountChange = (e) => {
         setAmount(e.target.value);
@@ -44,8 +44,11 @@ function App() {
     }
 
     useEffect(() => {
-        console.log(balance)
-    }, [])
+        const bal = getBalance();
+        const history = getHistory();
+        setBalance(bal);
+        setHis(history);
+    }, [his])
 
     return (
         <>
@@ -55,7 +58,7 @@ function App() {
                         <h1 className='font-semibold text-2xl my-4'>My account</h1>
                         <div className="flex">
                             <p>Balance</p>
-                            <p className='text-3xl font-bold'>0€</p>
+                            <p className='text-3xl font-bold'>{balance}€</p>
                         </div>
                         <p className='font-semibold mb-3'>History</p>
 

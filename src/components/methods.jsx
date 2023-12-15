@@ -24,11 +24,10 @@ export function getBalance() {
      let expenses = 0;
      history.forEach(element => {
           if (element.type === 'income') {
-               incomes += element.amount;
+               incomes += parseFloat(element.amount);
           } else {
-               expenses += element.amount;
+               expenses -= parseFloat(element.amount);
           }
      });
-     let balance = incomes - expenses;
-     return balance;
+     return incomes + expenses;
 }
