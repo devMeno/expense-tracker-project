@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Transaction from './components/transaction'
 import { getBalance } from './components/methods'
 
+
 function App() {
     const [amount, setAmount] = useState(0);
     const [date, setDate] = useState("");
@@ -52,15 +53,15 @@ function App() {
 
     return (
         <>
-            <div className="flex h-screen">
-                <div className="w-3/5">
-                    <div className="w-8/12  justify-center m-auto">
+            <div className="flex h-screen w-full">
+                <div className="w-11/12 mx-auto lg:w-3/5">
+                    <div className="w-full lg:w-8/12  justify-center m-auto">
                         <h1 className='font-semibold text-2xl my-4'>My account</h1>
-                        <div className="flex">
-                            <p>Balance</p>
-                            <p className='text-3xl font-bold'>{balance}€</p>
+                        <div className="w-full rounded-xl px-6 py-3 bg-gradient-to-r from-cyan-100 to-blue-500">
+                            <p className='text-sm'>This month's balance</p>
+                            <p className='text-6xl font-bold'>{balance}€</p>
                         </div>
-                        <p className='font-semibold mb-3'>History</p>
+                        <p className='font-semibold text-xl my-8'>Transactions</p>
 
                         {his.map((trans) => (
                             <Transaction param={trans} />
@@ -68,7 +69,7 @@ function App() {
 
 
                         {/* <!-- Modal toggle --> */}
-                        <button data-modal-target="default-modal" data-modal-toggle="default-modal" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onClick={(e) => {
+                        <button data-modal-target="default-modal" data-modal-toggle="default-modal" className="text-white w-full bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 mt-4" type="button" onClick={(e) => {
                             e.preventDefault();
                             console.log(his);
                             console.log(type)
@@ -77,7 +78,7 @@ function App() {
                         </button>
 
                         {/* <!-- Main modal --> */}
-                        <div id="default-modal" tabIndex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-2/3 md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div id="default-modal" tabIndex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center lg:w-2/3 md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div className="relative p-4 w-full max-w-2xl max-h-full">
                                 {/* <!-- Modal content --> */}
                                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -160,16 +161,16 @@ function App() {
                                     </div>
                                     {/* <!-- Modal footer --> */}
                                     <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button data-modal-hide="default-modal" type="button" className="text-white w-full bg-black focus:outline-none focus:ring-2 focus:ring-gray-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => {
+                                        <button data-modal-hide="default-modal" type="button" className="text-white w-full bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={(e) => {
                                             e.preventDefault();
                                             console.log(transaction);
                                             addTransaction(transaction);
-                                            // setAmount(0);
-                                            // setDate('');
-                                            // setFirstAttribute('');
-                                            // setSecondAttribute('');
+                                            setAmount(0);
+                                            setDate('');
+                                            setFirstAttribute('');
+                                            setSecondAttribute('');
                                             // console.log(transaction)
-                                        }}>Add transaction</button>
+                                        }} disabled={date === '' || amount === 0 || firstAttribute === '' || secondAttribute === ''}>Add transaction</button>
 
                                     </div>
                                 </div>
@@ -240,7 +241,7 @@ function App() {
 </div> */}
                     </div>
                 </div>
-                <div className="w-2/5 bg-blue-200"></div>
+                <div className="w-0 lg:w-2/5 bg-blue-200"></div>
             </div>
         </>
     )
