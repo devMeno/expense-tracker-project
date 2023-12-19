@@ -7,6 +7,7 @@ import { getHistory } from './components/methods'
 import { v4 as uuidv4 } from 'uuid'
 import Transaction from './components/transaction'
 import { getBalance } from './components/methods'
+import image from './image/image.jpeg'
 
 
 function App() {
@@ -62,6 +63,8 @@ function App() {
                             <p className='text-6xl font-bold'>{balance}€</p>
                         </div>
                         <p className='font-semibold text-xl my-8'>Transactions</p>
+
+                        {his.length === 0 ? <p>You haven't add a transaction for the moment!</p> : null}
 
                         {his.map((trans) => (
                             <Transaction param={trans} />
@@ -165,12 +168,12 @@ function App() {
                                             e.preventDefault();
                                             console.log(transaction);
                                             addTransaction(transaction);
-                                            setAmount(0);
-                                            setDate('');
-                                            setFirstAttribute('');
-                                            setSecondAttribute('');
+                                            // setAmount(0);
+                                            // setDate('');
+                                            // setFirstAttribute('');
+                                            // setSecondAttribute('');
                                             // console.log(transaction)
-                                        }} disabled={date === '' || amount === 0 || firstAttribute === '' || secondAttribute === ''}>Add transaction</button>
+                                        }}>Add transaction</button>
 
                                     </div>
                                 </div>
@@ -241,7 +244,7 @@ function App() {
 </div> */}
                     </div>
                 </div>
-                <div className="w-0 lg:w-2/5 bg-blue-200"></div>
+                <div className="w-0 lg:w-2/5 bg-red-200 "><img src={image} alt="" className='h-screen' /></div>
             </div>
         </>
     )
