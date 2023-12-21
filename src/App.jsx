@@ -244,7 +244,9 @@ function App() {
 </div> */}
                     </div>
                 </div>
-                <div className="w-0 lg:w-2/5 bg-red-200 "><img src={image} alt="" className='h-screen' /></div>
+                <div className="w-0 lg:w-2/5 bg-blue-300 ">
+                    {/* <img src={image} alt="" className='h-screen' /> */}
+                </div>
             </div>
         </>
     )
