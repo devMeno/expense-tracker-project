@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Transaction from './components/transaction'
 import { getBalance } from './components/methods'
 import image from './image/image.jpeg'
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function App() {
     const [amount, setAmount] = useState(0);
@@ -34,6 +34,10 @@ function App() {
 
     const handleSecondAttributeChange = (e) => {
         setSecondAttribute(e.target.value);
+    }
+
+    const alertFunction = () => {
+        Notify.failure('Veuillez remplir tous les champs');
     }
 
     const transaction = {
@@ -165,9 +169,14 @@ function App() {
                                     {/* <!-- Modal footer --> */}
                                     <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                         <button data-modal-hide="default-modal" type="button" className="text-white w-full bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={(e) => {
-                                            e.preventDefault();
-                                            console.log(transaction);
-                                            addTransaction(transaction);
+                                            if (transaction.date != "" && transaction.amount > 0 && transaction.first != "" && transaction.second != "") {
+                                                e.preventDefault();
+                                                console.log(transaction);
+                                                addTransaction(transaction);
+                                            } else {
+                                                alertFunction();
+                                                return (<ToastContainer />)
+                                            }
                                             // setAmount(0);
                                             // setDate('');
                                             // setFirstAttribute('');
