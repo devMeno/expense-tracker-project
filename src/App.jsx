@@ -37,7 +37,8 @@ function App() {
     }
 
     const alertFunction = () => {
-        Notify.failure('Veuillez remplir tous les champs');
+        Notify.init({ width: '100%', fontFamily: 'Inter', clickToClose: true, timeout: 1000, position: 'center-top' })
+        Notify.failure('Please complete all fields');
     }
 
     const transaction = {
@@ -61,7 +62,7 @@ function App() {
             <div className="flex h-screen w-full">
                 <div className="w-11/12 mx-auto lg:w-3/5">
                     <div className="w-full lg:w-8/12  justify-center m-auto">
-                        <h1 className='font-semibold text-2xl my-4'>My account</h1>
+                        <h1 className='font-semibold text-2xl my-4'>My account app</h1>
                         <div className="w-full rounded-xl px-6 py-3 bg-gradient-to-r from-cyan-100 to-blue-500">
                             <p className='text-sm'>This month's balance</p>
                             <p className='text-6xl font-bold'>{balance}€</p>
